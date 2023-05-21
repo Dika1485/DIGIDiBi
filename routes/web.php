@@ -14,6 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WebController::class, 'index']);
+
+Route::get('/', function () {
+    return view('index1');
+});
+Route::get('dashboard', function () {
+    return view('index');
+});
+Route::get('dashboard/packagetype', function () {
+    return view('packagetype');
+});
+Route::get('dashboard/order', function () {
+    return view('order');
+});
+Route::get('dashboard/history', function () {
+    return view('history');
+});
+Route::get('/daftar', [WebController::class, 'index']);
 Route::get('/payment', [WebController::class, 'payment']);
 Route::post('/payment', [WebController::class, 'payment_post']);
