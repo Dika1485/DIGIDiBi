@@ -19,6 +19,7 @@ class CreateProgressTable extends Migration
             $table->dateTime('waktu');
             $table->string('status');
             $table->timestamps();
+            //$table->foreign('pesanan_id')->references('id')->on('pesanans')->onDelete('cascade');
         });
     }
 

@@ -15,6 +15,7 @@ class CreatePesanansTable extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
+            $table->integer('paket_id');
             $table->string('nama');
             $table->string('no_hp');
             $table->integer('berat');
@@ -24,6 +25,7 @@ class CreatePesanansTable extends Migration
             $table->dateTime('tgl_pesan');
             $table->dateTime('tgl_selesai');
             $table->timestamps();
+            //$table->foreign('paket_id')->references('id')->on('pakets')->onDelete('cascade');
         });
     }
 

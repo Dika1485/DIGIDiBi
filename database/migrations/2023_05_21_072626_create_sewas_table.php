@@ -20,6 +20,7 @@ class CreateSewasTable extends Migration
             $table->string('method');
             $table->dateTime('waktu');
             $table->timestamps();
+            //$table->foreign('akun_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -9,4 +9,11 @@ class Pesanan extends Model
 {
     protected $guarded=[];
     use HasFactory;
+
+    public function paket (){
+        return $this->belongsTo(Paket::class);
+    }
+    public function progress (){
+        return $this->hasMany(Progress::class);
+    }
 }

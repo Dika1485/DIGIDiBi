@@ -28,6 +28,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
+    public function sewa (){
+        return $this->hasMany(Sewa::class);
+    }
+    public function paket (){
+        return $this->hasMany(Paket::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

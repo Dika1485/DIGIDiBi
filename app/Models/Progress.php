@@ -9,4 +9,8 @@ class Progress extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function pesanan (){
+        return $this->belongsTo(Pesanan::class);
+    }
 }
