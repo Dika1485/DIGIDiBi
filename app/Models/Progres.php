@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Progress extends Model
+class Progres extends Model
 {
     use HasFactory;
     protected $guarded=[];
-
     public function pesanan (){
         return $this->belongsTo(Pesanan::class);
     }

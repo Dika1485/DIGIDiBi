@@ -31,7 +31,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
@@ -130,6 +130,22 @@
 <!--                    <i class="fas fa-fw fa-chart-area"></i>-->
 <!--                    <span>Charts</span></a>-->
 <!--            </li>-->
+
+            <!-- Nav Item - Tables -->
+            @if(Auth::user()->role=="Admin")
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/users">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/rent">
+                    <i class="fas fa-fw fa-money-check-alt"></i>
+                    <span>Rental</span></a>
+            </li>
+            @endif
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -343,13 +359,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/dashboard/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -362,7 +378,7 @@
 <!--                                    Activity Log-->
 <!--                                </a>-->
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -379,8 +395,10 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Package Type</h1>
-                    <p class="mb-4">The following is a package type page that manages laundry package types.</p>
+                    <p class="mb-4">Here is a page to manage package types of laundry.</p>
 
+                    <p><a href="/dashboard/packagetype/create"><button class="btn btn-success">+ Create Package Type</button></a></p>
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -392,32 +410,38 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Paket</th>
-                                            <th>Harga</th>
-                                            <th>Setrika</th>
-                                            <th>Estimasi</th>
+                                            <th>Package Type</th>
+                                            <th>Price (Rp per Kg)</th>
+                                            <th>Ironing</th>
+                                            <th>Estimation (Hour)</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Paket</th>
-                                            <th>Harga</th>
-                                            <th>Setrika</th>
-                                            <th>Estimasi</th>
+                                            <th>Package Type</th>
+                                            <th>Price (Rp per Kg)</th>
+                                            <th>Ironing</th>
+                                            <th>Estimation (Hour)</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    	@foreach($paket as $paket)
                                         <tr>
-                                            <td>13</td>
-                                            <td>Reguler</td>
-                                            <td>30000</td>
-                                            <td>Yes</td>
-                                            <td>48</td>
-                                            <td><button class="btn btn-primary">Edit</button> | <button class="btn btn-danger">Delete</button></td>
+                                            <td>{{$paket->id}}</td>
+                                            <td>{{$paket->name}}</td>
+                                            <td>{{$paket->price}}</td>
+                                            <td>{{($paket->isironing==0)?"No":"Yes"}}</td>
+                                            <td>{{$paket->estimation}}</td>
+                                            <form action="/dashboard/packagetype" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$paket->id}}">
+                                            <td><a href="/dashboard/packagetype/edit?id={{$paket->id}}" class="btn btn-primary">Edit</a> | <button type="submit" name="submit" class="btn btn-danger">Delete</button></td>
+                                            </form>
                                         </tr>
+                                        @endforeach
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
                                             <td>Junior Technical Author</td>
@@ -905,7 +929,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Logout') }}</a>
+                    <!-- <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">{{ __('Log Out') }}</x-jet-dropdown-link> -->
+                    </form>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - History</title>
+    <title>DIGIDiBi - Profile</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -132,20 +132,18 @@
 <!--            </li>-->
 
             <!-- Nav Item - Tables -->
-            @if(Auth::user()->role=="Admin")
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="/dashboard/users">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Users</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
+            Nav Item - Tables
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard/rent">
                     <i class="fas fa-fw fa-money-check-alt"></i>
-                    <span>Rental</span></a>
-            </li>
-            @endif
+                    <span>Rent</span></a>
+            </li> -->
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -162,7 +160,7 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/dashboard/history">
                     <i class="fas fa-fw fa-history"></i>
                     <span>History</span></a>
@@ -365,7 +363,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/dashboard/profile">
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -378,7 +376,7 @@
 <!--                                    Activity Log-->
 <!--                                </a>-->
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -394,63 +392,69 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">History</h1>
-                    <p class="mb-4">Here is a history page that display orders that have been completed or not.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Profile</h1>
+                    <p class="mb-4">Here is a page that manage your profile.</p>
+                    <p><a href="/dashboard/profile/edit"><button class="btn btn-success">Edit Profile</button></a></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">History Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Profile Information</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                                    <!-- <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> -->
                                     <tbody>
-                                    	@foreach($pesanan as $pesanan)
                                         <tr>
-                                            <td>{{$pesanan->id}}</td>
-                                            <td>{{$pesanan->namapaket}}</td>
-                                            <td>{{$pesanan->name}}</td>
-                                            <td>{{$pesanan->phonenumber}}</td>
-                                            <td>{{$pesanan->weight}}</td>
-                                            <td>{{$pesanan->weight*$pesanan->price}}</td>
-                                            <td>{{$pesanan->address}}</td>
-                                            <td>{{$pesanan->isshuttle==1?"Yes":"No"}}</td>
-                                            <td>{{$pesanan->timeestimation}}</td>
-                                            <td>{{$pesanan->timeorder}}</td>
-                                            <td>{{$pesanan->timefinish}}</td>
+                                            <th>Email</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->email}}</td>
                                         </tr>
-                                        @endforeach
+                                        <tr>
+                                            <th>Username</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->username}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Password</th>
+                                            <td>:</td>
+                                            <td>********</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Laundry Name</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->laundryname}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->phonenumber}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->address}}</td>
+                                        </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
                                             <td>Junior Technical Author</td>
@@ -896,6 +900,66 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Browser Sessions</h6>
+                        </div>
+                        <div class="card-body">
+                            Manage and log out your active sessions on other browsers and devices. 
+                            <div class="table-responsive">
+                                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                                    <!-- <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot> -->
+                                    @if (count(Auth::session()) > 0)
+                                    <tbody>
+                                        @foreach (Auth::session() as $session)
+                                        <tr>
+                                            <th>
+                                                @if ($session->agent->isDesktop())
+                                                <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8 text-gray-500">
+                                                    <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                                </svg>
+                                                @else
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-gray-500">
+                                                    <path d="M0 0h24v24H0z" stroke="none"></path><rect x="7" y="4" width="10" height="16" rx="1"></rect><path d="M11 5h2M12 17v.01"></path>
+                                                </svg>
+                                                @endif
+                                                <p>{{ $session->agent->platform() ? $session->agent->platform() : 'Unknown' }} - {{ $session->agent->browser() ? $session->agent->browser() : 'Unknown' }}</p>
+                                                <p>
+                                                    {{ $session->ip_address }},
+                                                    @if ($session->is_current_device)
+                                                        <span class="text-gray-500 font-semibold">{{ __('This device') }}</span>
+                                                    @else
+                                                        {{ __('Last active') }} {{ $session->last_active }}
+                                                    @endif
+                                                </p>
+                                            </th>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                    @endif
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -938,13 +1002,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form method="POST" action="{{ route('logout') }}" x-data>
-                        @csrf
-                        <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Logout') }}</a>
-                    <!-- <form method="POST" action="{{ route('logout') }}" x-data>
-                        @csrf
-                        <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">{{ __('Log Out') }}</x-jet-dropdown-link> -->
-                    </form>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>

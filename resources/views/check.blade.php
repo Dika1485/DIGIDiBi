@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - Login</title>
+    <title>DIGIDiBi - Check</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -42,24 +42,13 @@
                             <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
-                                    <x-jet-validation-errors class="mb-4 text-danger" />
-                                    @if (session('status'))
-                                        <div class="mb-4 font-medium text-sm text-green-600">
-                                            {{ session('status') }}
-                                        </div>
-                                    @endif
-                                    <form class="user" method="POST" action="{{ route('login') }}">
+                                        <h1 class="h4 text-gray-900 mb-4">Check Laundry Order Progress</h1>
+                                    <form class="user" method="GET" action="/check">
                                         @csrf
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email or Username..." name="email" :value="old('email')" required autofocus>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" name="password" required autocomplete="current-password">
+                                                placeholder="Enter Order ID..." name="id" :value="old('id')" required autofocus>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -67,8 +56,8 @@
                                                 <label class="custom-control-label" for="customCheck">{{ __('Remember me') }}</label> -->
                                             </div>
                                         </div>
-                                        <button class="btn btn-primary btn-user btn-block">
-                                            {{ __('Login') }}
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Check Now
                                         </button>
 <!--                                        <hr>-->
 <!--                                        <a href="index.html" class="btn btn-google btn-user btn-block">-->
@@ -79,12 +68,6 @@
 <!--                                        </a>-->
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/forgot-password">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="/register">Create an Account!</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

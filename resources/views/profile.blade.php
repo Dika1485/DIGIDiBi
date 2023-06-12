@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - History</title>
+    <title>DIGIDiBi - Profile</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -132,6 +132,20 @@
 <!--            </li>-->
 
             <!-- Nav Item - Tables -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/dashboard/users">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span></a>
+            </li>
+
+            Nav Item - Tables
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/rent">
+                    <i class="fas fa-fw fa-money-check-alt"></i>
+                    <span>Rent</span></a>
+            </li> -->
+
+            <!-- Nav Item - Tables -->
             @if(Auth::user()->role=="Admin")
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard/users">
@@ -162,7 +176,7 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/dashboard/history">
                     <i class="fas fa-fw fa-history"></i>
                     <span>History</span></a>
@@ -394,63 +408,72 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">History</h1>
-                    <p class="mb-4">Here is a history page that display orders that have been completed or not.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Profile</h1>
+                    <p class="mb-4">Here is a page that manage your profile.</p>
+                    <p>
+                        <a href="/dashboard/profile/edit"><button class="btn btn-success">Edit Profile</button></a>
+                        <a href="/dashboard/profile/editpassword"><button class="btn btn-info">Edit Password</button></a>
+                    </p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">History Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Profile Information</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                                    <!-- <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> -->
                                     <tbody>
-                                    	@foreach($pesanan as $pesanan)
                                         <tr>
-                                            <td>{{$pesanan->id}}</td>
-                                            <td>{{$pesanan->namapaket}}</td>
-                                            <td>{{$pesanan->name}}</td>
-                                            <td>{{$pesanan->phonenumber}}</td>
-                                            <td>{{$pesanan->weight}}</td>
-                                            <td>{{$pesanan->weight*$pesanan->price}}</td>
-                                            <td>{{$pesanan->address}}</td>
-                                            <td>{{$pesanan->isshuttle==1?"Yes":"No"}}</td>
-                                            <td>{{$pesanan->timeestimation}}</td>
-                                            <td>{{$pesanan->timeorder}}</td>
-                                            <td>{{$pesanan->timefinish}}</td>
+                                            <th>Email</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->email}}</td>
                                         </tr>
-                                        @endforeach
+                                        <tr>
+                                            <th>Username</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->username}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Password</th>
+                                            <td>:</td>
+                                            <td>********</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Laundry Name</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->laundryname}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->phonenumber}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td>:</td>
+                                            <td>{{Auth::user()->address}}</td>
+                                        </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
                                             <td>Junior Technical Author</td>

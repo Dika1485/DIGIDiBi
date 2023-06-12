@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - History</title>
+    <title>DIGIDiBi - Edit Profile</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -132,6 +132,20 @@
 <!--            </li>-->
 
             <!-- Nav Item - Tables -->
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="/dashboard/users">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span></a>
+            </li>
+
+            Nav Item - Tables
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/rent">
+                    <i class="fas fa-fw fa-money-check-alt"></i>
+                    <span>Rent</span></a>
+            </li> -->
+
+            <!-- Nav Item - Tables -->
             @if(Auth::user()->role=="Admin")
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard/users">
@@ -162,7 +176,7 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/dashboard/history">
                     <i class="fas fa-fw fa-history"></i>
                     <span>History</span></a>
@@ -346,7 +360,7 @@
 <!--                                    <div>-->
 <!--                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone-->
 <!--                                            told me that people say this to all dogs, even if they aren't good...</div>-->
-<!--                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>-->
+<!--                                        <div return redirect(url('/dashboard/profile/edit'));class="small text-gray-500">Chicken the Dog · 2w</div>-->
 <!--                                    </div>-->
 <!--                                </a>-->
 <!--                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>-->
@@ -359,7 +373,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -394,63 +408,93 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">History</h1>
-                    <p class="mb-4">Here is a history page that display orders that have been completed or not.</p>
-
+                    <h1 class="h3 mb-2 text-gray-800">Edit Profile</h1>
+                    <p class="mb-4">Here is a page to edit profile.</p>
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">History Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Form Edit Profile</h6>
                         </div>
                         <div class="card-body">
+                        @if (isset($hasil))
+                            <div class="mb-4 font-medium text-sm text-green-600">
+                                <p class="mb-4 text-danger">{{$hasil}}</p>
+                            </div>
+                        @endif
+                        <form action="/dashboard/profile/edit" method="POST">
+                            @csrf
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                                    <!-- <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> -->
                                     <tbody>
-                                    	@foreach($pesanan as $pesanan)
                                         <tr>
-                                            <td>{{$pesanan->id}}</td>
-                                            <td>{{$pesanan->namapaket}}</td>
-                                            <td>{{$pesanan->name}}</td>
-                                            <td>{{$pesanan->phonenumber}}</td>
-                                            <td>{{$pesanan->weight}}</td>
-                                            <td>{{$pesanan->weight*$pesanan->price}}</td>
-                                            <td>{{$pesanan->address}}</td>
-                                            <td>{{$pesanan->isshuttle==1?"Yes":"No"}}</td>
-                                            <td>{{$pesanan->timeestimation}}</td>
-                                            <td>{{$pesanan->timeorder}}</td>
-                                            <td>{{$pesanan->timefinish}}</td>
+                                            <th>Email</th>
+                                            <td><input type="email" class="form-control form-control-user"
+                                                id="nama" aria-describedby="emailHelp"
+                                                placeholder="Enter Email..." name="email" value="{{Auth::user()->email}}" required autofocus autocomplete="email"></td>
                                         </tr>
-                                        @endforeach
+                                        <tr>
+                                            <th>Username</th>
+                                            <td><input type="text" class="form-control form-control-user"
+                                                id="harga" aria-describedby="emailHelp"
+                                                placeholder="Username" name="username" value="{{Auth::user()->username}}" required autocomplete="username"></td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <th>Current Password</th>
+                                            <td><input type="password" class="form-control form-control-user"
+                                                id="estimasi" aria-describedby="emailHelp"
+                                                placeholder="Current Password" name="current_password" required autocomplete="current-password"></td>
+                                        </tr> -->
+                                        <!-- <tr>
+                                            <th>Password</th>
+                                            <td><input type="password" class="form-control form-control-user"
+                                                id="estimasi" aria-describedby="emailHelp"
+                                                placeholder="New Password" name="password" required autocomplete="new-password"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Repeat Password</th>
+                                            <td><input type="password" class="form-control form-control-user"
+                                                id="estimasi" aria-describedby="emailHelp"
+                                                placeholder="Repeat Password" name="password_confirmation" required autocomplete="new-password"></td>
+                                        </tr> -->
+                                        <tr>
+                                            <th>Laundry Name</th>
+                                            <td><input type="text" class="form-control form-control-user"
+                                                id="harga" aria-describedby="emailHelp"
+                                                placeholder="Laundry Name" name="laundryname" value="{{Auth::user()->laundryname}}" required autocomplete="laundryname"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <td><input type="tel" class="form-control form-control-user"
+                                                id="hp" aria-describedby="emailHelp"
+                                                placeholder="Phone Number" name="phonenumber" value="{{Auth::user()->phonenumber}}" required autocomplete="phone"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td><textarea type="text" class="form-control form-control-user"
+                                                id="alamat" aria-describedby="emailHelp"
+                                                placeholder="Address" name="address" required autocomplete="address">{{Auth::user()->address}}</textarea></td>
+                                        </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
                                             <td>Junior Technical Author</td>
@@ -894,6 +938,8 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <button type="submit" name="actions" on="saved" class="btn btn-success form-control form-control-user" id="nama" value="Submit">Submit</button>
+                        </form>
                         </div>
                     </div>
 

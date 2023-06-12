@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Progress;
+use App\Models\Progres;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
@@ -16,16 +16,12 @@ class ProgressSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID)');
-
-            Progress::insert([
-            'pesanan_id'=>'1',
-            'waktu'=>$faker->dateTime,
-            'status'=> $faker->text(10),
+        for ($i=1; $i <= 100; $i++) {
+            Progres::insert([
+	            'order_id'=>$i,
+	            'time'=>$faker->dateTimeBetween('-1 day', 'now'),
+	            'progress'=>$faker->randomElement(['In Queue','Wash','Ironing','Packing','Delivered']),
             ]);
-            Progress::insert([
-                'pesanan_id'=>'2',
-                'waktu'=>$faker->dateTime,
-                'status'=> $faker->text(10),
-                ]);
+        }
     }
 }

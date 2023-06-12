@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - History</title>
+    <title>DIGIDiBi - Create User</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -132,8 +132,7 @@
 <!--            </li>-->
 
             <!-- Nav Item - Tables -->
-            @if(Auth::user()->role=="Admin")
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/dashboard/users">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Users</span></a>
@@ -143,9 +142,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard/rent">
                     <i class="fas fa-fw fa-money-check-alt"></i>
-                    <span>Rental</span></a>
+                    <span>Rent</span></a>
             </li>
-            @endif
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -162,7 +160,7 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/dashboard/history">
                     <i class="fas fa-fw fa-history"></i>
                     <span>History</span></a>
@@ -359,7 +357,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -394,63 +392,80 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">History</h1>
-                    <p class="mb-4">Here is a history page that display orders that have been completed or not.</p>
-
+                    <h1 class="h3 mb-2 text-gray-800"> Create User</h1>
+                    <p class="mb-4">Here is a page to insert users data.</p>
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">History Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Form Create User</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                                    <!-- <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> -->
                                     <tbody>
-                                    	@foreach($pesanan as $pesanan)
                                         <tr>
-                                            <td>{{$pesanan->id}}</td>
-                                            <td>{{$pesanan->namapaket}}</td>
-                                            <td>{{$pesanan->name}}</td>
-                                            <td>{{$pesanan->phonenumber}}</td>
-                                            <td>{{$pesanan->weight}}</td>
-                                            <td>{{$pesanan->weight*$pesanan->price}}</td>
-                                            <td>{{$pesanan->address}}</td>
-                                            <td>{{$pesanan->isshuttle==1?"Yes":"No"}}</td>
-                                            <td>{{$pesanan->timeestimation}}</td>
-                                            <td>{{$pesanan->timeorder}}</td>
-                                            <td>{{$pesanan->timefinish}}</td>
+                                            <th>Email</th>
+                                            <td><input type="email" class="form-control form-control-user"
+                                                id="nama" aria-describedby="emailHelp"
+                                                placeholder="Enter Email..."></td>
                                         </tr>
-                                        @endforeach
+                                        <tr>
+                                            <th>Username</th>
+                                            <td><input type="text" class="form-control form-control-user"
+                                                id="harga" aria-describedby="emailHelp"
+                                                placeholder="Username"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Password</th>
+                                            <td><input type="password" class="form-control form-control-user"
+                                                id="estimasi" aria-describedby="emailHelp"
+                                                placeholder="Password"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Repeat Password</th>
+                                            <td><input type="password" class="form-control form-control-user"
+                                                id="estimasi" aria-describedby="emailHelp"
+                                                placeholder="Repeat Password"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Laundry Name</th>
+                                            <td><input type="text" class="form-control form-control-user"
+                                                id="harga" aria-describedby="emailHelp"
+                                                placeholder="Laundry Name"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <td><input type="tel" class="form-control form-control-user"
+                                                id="hp" aria-describedby="emailHelp"
+                                                placeholder="Phone Number"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td><textarea type="text" class="form-control form-control-user"
+                                                id="alamat" aria-describedby="emailHelp"
+                                                placeholder="Address"></textarea></td>
+                                        </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
                                             <td>Junior Technical Author</td>
@@ -894,6 +909,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                                <input type="submit" class="btn btn-success form-control form-control-user" id="nama" value="Submit">
                         </div>
                     </div>
 

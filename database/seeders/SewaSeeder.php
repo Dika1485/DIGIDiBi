@@ -15,24 +15,15 @@ class SewaSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID)');
-
+        for ($i=1; $i <= 10; $i++) { 
             Sewa::insert([
-                'midtrans_id' => $faker->randomDigit(),
-                'akun_id' => '1',
-                'method'=> $faker->name,
-                'waktu' => $faker->date
+                'user_id' =>$i,
+                'midtrans_id' => rand(),
+                'method' => "bank_transfer",
+                'status' => 'settlement',
+                'amount' => 10000,
+                'time' => $faker->dateTimeBetween('-1 month', 'now')
             ]);
-            Sewa::insert([
-                'midtrans_id' => $faker->randomDigit,
-                'akun_id' => '2',
-                'method'=> $faker->name,
-                'waktu' => now()
-            ]);
-            Sewa::insert([
-                'midtrans_id' => $faker->randomDigit,
-                'akun_id' => '3',
-                'method'=> $faker->name,
-                'waktu' => now()
-            ]);
+        }
         }
     }

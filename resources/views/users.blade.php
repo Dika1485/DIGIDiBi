@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - History</title>
+    <title>DIGIDiBi - Users</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -132,8 +132,7 @@
 <!--            </li>-->
 
             <!-- Nav Item - Tables -->
-            @if(Auth::user()->role=="Admin")
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/dashboard/users">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Users</span></a>
@@ -145,7 +144,6 @@
                     <i class="fas fa-fw fa-money-check-alt"></i>
                     <span>Rental</span></a>
             </li>
-            @endif
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -162,7 +160,7 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/dashboard/history">
                     <i class="fas fa-fw fa-history"></i>
                     <span>History</span></a>
@@ -359,7 +357,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -394,13 +392,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">History</h1>
-                    <p class="mb-4">Here is a history page that display orders that have been completed or not.</p>
-
+                    <h1 class="h3 mb-2 text-gray-800">Users</h1>
+                    <p class="mb-4">Here is a page to manage users.</p>
+                    <p><a href="/dashboard/users/create"><button class="btn btn-success">+ Create User</button></a></p>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">History Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Users Table</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -408,47 +406,44 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
+                                            <th>Email</th>
+                                            <th>Username</th>
+                                            <th>Password</th>
+                                            <th>Role</th>
                                             <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
+                                            <th>Laundry Name</th>
                                             <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Rental Deadline</th>
+                                            <!-- <th>Action</th> -->
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
+                                            <th>Email</th>
+                                            <th>Username</th>
+                                            <th>Password</th>
+                                            <th>Role</th>
                                             <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
+                                            <th>Laundry Name</th>
                                             <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Rental Deadline</th>
+                                            <!-- <th>Action</th> -->
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    	@foreach($pesanan as $pesanan)
+                                        @foreach($user as $user)
                                         <tr>
-                                            <td>{{$pesanan->id}}</td>
-                                            <td>{{$pesanan->namapaket}}</td>
-                                            <td>{{$pesanan->name}}</td>
-                                            <td>{{$pesanan->phonenumber}}</td>
-                                            <td>{{$pesanan->weight}}</td>
-                                            <td>{{$pesanan->weight*$pesanan->price}}</td>
-                                            <td>{{$pesanan->address}}</td>
-                                            <td>{{$pesanan->isshuttle==1?"Yes":"No"}}</td>
-                                            <td>{{$pesanan->timeestimation}}</td>
-                                            <td>{{$pesanan->timeorder}}</td>
-                                            <td>{{$pesanan->timefinish}}</td>
+                                            <td>{{$user->id}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->username}}</td>
+                                            <td>***</td>
+                                            <td>{{$user->role}}</td>
+                                            <td>{{$user->phonenumber}}</td>
+                                            <td>{{$user->laundryname}}</td>
+                                            <td>{{$user->address}}</td>
+                                            <td>{{$user->deadline}}</td>
+                                            <!-- <td><button class="btn btn-primary">Edit</button> | <button class="btn btn-danger">Delete</button></td> -->
                                         </tr>
                                         @endforeach
                                         <!-- <tr>

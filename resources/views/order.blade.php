@@ -31,7 +31,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
@@ -130,6 +130,22 @@
 <!--                    <i class="fas fa-fw fa-chart-area"></i>-->
 <!--                    <span>Charts</span></a>-->
 <!--            </li>-->
+
+            <!-- Nav Item - Tables -->
+            @if(Auth::user()->role=="Admin")
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/users">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/rent">
+                    <i class="fas fa-fw fa-money-check-alt"></i>
+                    <span>Rental</span></a>
+            </li>
+            @endif
 
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
@@ -343,13 +359,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/dashboard/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -362,7 +378,7 @@
 <!--                                    Activity Log-->
 <!--                                </a>-->
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -379,8 +395,8 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Order</h1>
-                    <p class="mb-4">The following is an order page that displays orders that have not been completed.</p>
-
+                    <p class="mb-4">Here is a page to manage orders that have not been completed.</p>
+                    <p><a href="/dashboard/order/create"><button class="btn btn-success">+ Create Order</button></a></p>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -392,47 +408,64 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Paket</th>
-                                            <th>Pemesan</th>
-                                            <th>No. HP</th>
-                                            <th>Berat</th>
-                                            <th>Alamat</th>
-                                            <th>Antar Jemput</th>
-                                            <th>Estimasi</th>
-                                            <th>Tanggal Pesan</th>
+                                            <th>Check ID</th>
+                                            <th>Package Type</th>
+                                            <th>Customer</th>
+                                            <th>Phone Number</th>
+                                            <th>Weight (Kg)</th>
+                                            <th>Price (Rp)</th>
+                                            <th>Address</th>
+                                            <th>Shuttle</th>
+                                            <th>Time Estimation</th>
+                                            <th>Time Order</th>
                                             <th>Progress</th>
-                                            <th>Next</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Paket</th>
-                                            <th>Pemesan</th>
-                                            <th>No. HP</th>
-                                            <th>Berat</th>
-                                            <th>Alamat</th>
-                                            <th>Antar Jemput</th>
-                                            <th>Estimasi</th>
-                                            <th>Tanggal Pesan</th>
+                                            <th>Check ID</th>
+                                            <th>Package Type</th>
+                                            <th>Customer</th>
+                                            <th>Phone Number</th>
+                                            <th>Weight (Kg)</th>
+                                            <th>Price (Rp)</th>
+                                            <th>Address</th>
+                                            <th>Shuttle</th>
+                                            <th>Time Estimation</th>
+                                            <th>Time Order</th>
                                             <th>Progress</th>
-                                            <th>Next</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    	@foreach($pesanan as $pesanan)
                                         <tr>
-                                            <td>13</td>
-                                            <td>Reguler</td>
-                                            <td>John</td>
-                                            <td>08271738293</td>
-                                            <td>2</td>
-                                            <td>Kalimanah</td>
-                                            <td>Yes</td>
-                                            <td>3</td>
-                                            <td>14-10-2023</td>
-                                            <td>Dalam Antrian</td>
-                                            <td><button class="btn btn-primary">Wash</button></td>
+                                            <td>{{$pesanan->id}}</td>
+                                            <td>{{$pesanan->check_id}}</td>
+                                            <td>{{$pesanan->namapaket}}</td>
+                                            <td>{{$pesanan->name}}</td>
+                                            <td>{{$pesanan->phonenumber}}</td>
+                                            <td>{{$pesanan->weight}}</td>
+                                            <td>{{$pesanan->weight*$pesanan->price}}</td>
+                                            <td>{{$pesanan->address}}</td>
+                                            <td>{{$pesanan->isshuttle==1?"Yes":"No"}}</td>
+                                            <td>{{$pesanan->timeestimation}}</td>
+                                            <td>{{$pesanan->timeorder}}</td>
+                                            <td>{{$pesanan->progress}}</td>
+                                            <form action="/dashboard/order" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$pesanan->id}}">
+                                            <input type="hidden" name="isshuttle" value="{{$pesanan->isshuttle}}">
+                                            <input type="hidden" name="isironing" value="{{$pesanan->isironing}}">
+                                            <td>
+                                                <button type="submit" name="progress" value="{{$pesanan->progress}}" class="btn btn-primary">Next</button>
+                                                 <!-- | <a href="https://wa.me/" target="_blank" class="btn btn-info" rel="noopener noreferrer">Share</a> -->
+                                            </td>
+                                            </form>
                                         </tr>
+                                        @endforeach
                                         <!--<tr>
                                             <td>Garrett Winters</td>
                                             <td>Accountant</td>
@@ -928,7 +961,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Logout') }}</a>
+                    <!-- <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">{{ __('Log Out') }}</x-jet-dropdown-link> -->
+                    </form>
                 </div>
             </div>
         </div>

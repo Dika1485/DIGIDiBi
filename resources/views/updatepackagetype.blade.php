@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - History</title>
+    <title>DIGIDiBi - Update Package Type</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -155,14 +155,14 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/dashboard/packagetype">
                     <i class="fas fa-fw fa-box-open"></i>
                     <span>Package Type</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/dashboard/history">
                     <i class="fas fa-fw fa-history"></i>
                     <span>History</span></a>
@@ -394,63 +394,64 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">History</h1>
-                    <p class="mb-4">Here is a history page that display orders that have been completed or not.</p>
-
+                    <h1 class="h3 mb-2 text-gray-800"> Update Package Type</h1>
+                    <p class="mb-4">Here is a page to update the package types of laundry.</p>
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">History Table</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Form Update Package Type</h6>
                         </div>
+                        <form action="/dashboard/packagetype/edit" method="post">
+                        @csrf
+                        @foreach($paket as $paket)
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                                    <!-- <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Package Type</th>
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
-                                            <th>Address</th>
-                                            <th>Shuttle</th>
-                                            <th>Time Estimation</th>
-                                            <th>Time Order</th>
-                                            <th>Time Finish</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Setrika</th>
+                                            <th>Estimasi</th>
+                                            <th>Action</th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> -->
                                     <tbody>
-                                    	@foreach($pesanan as $pesanan)
                                         <tr>
-                                            <td>{{$pesanan->id}}</td>
-                                            <td>{{$pesanan->namapaket}}</td>
-                                            <td>{{$pesanan->name}}</td>
-                                            <td>{{$pesanan->phonenumber}}</td>
-                                            <td>{{$pesanan->weight}}</td>
-                                            <td>{{$pesanan->weight*$pesanan->price}}</td>
-                                            <td>{{$pesanan->address}}</td>
-                                            <td>{{$pesanan->isshuttle==1?"Yes":"No"}}</td>
-                                            <td>{{$pesanan->timeestimation}}</td>
-                                            <td>{{$pesanan->timeorder}}</td>
-                                            <td>{{$pesanan->timefinish}}</td>
+                                            <th>Package Name</th>
+                                            <td><input type="text" class="form-control form-control-user"
+                                                id="nama" aria-describedby="emailHelp"
+                                                placeholder="Enter package name..." name="name" value="{{$paket->name}}"></td>
                                         </tr>
-                                        @endforeach
+                                        <tr>
+                                            <th>Price (Rp per Kg)</th>
+                                            <td><input type="text" class="form-control form-control-user"
+                                                id="harga" aria-describedby="emailHelp"
+                                                placeholder="Price" name="price" value="{{$paket->price}}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ironing (Yes/No)</th>
+                                            <td><input type="checkbox" name="isironing" class="form-control form-control-user"
+                                                id="setrika" aria-describedby="emailHelp" {{($paket->isironing==1)?"checked":""}}></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Estimation (Hour)</th>
+                                            <td><input type="text" class="form-control form-control-user"
+                                                id="estimasi" aria-describedby="emailHelp"
+                                                placeholder="Estimation" name="estimation" value="{{$paket->estimation}}"></td>
+                                        </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
                                             <td>Junior Technical Author</td>
@@ -893,8 +894,12 @@
                                         </tr> -->
                                     </tbody>
                                 </table>
+                                <input type="hidden" name="id" value="{{$paket->id}}">
                             </div>
+                                <button type="submit" class="btn btn-success form-control form-control-user" id="nama">Submit</button>
                         </div>
+                        @endforeach
+                        </form>
                     </div>
 
                 </div>

@@ -15,21 +15,16 @@ class PaketSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create('id_ID)');
-
-            Paket::insert([
-            'akun_id'=>'1',
-            'nama'=>'Reguler',
-            'harga'=> $faker->randomDigit(),
-            'isetrika'=> $faker->boolean(),
-            'estimasi'=> $faker->randomDigit()
+        $faker = Faker::create('id_ID');
+        for ($i=1; $i <= 10; $i++) {
+        	Paket::insert([
+        		'user_id'=>$faker->numberBetween(1,12),
+        		'name'=>$faker->randomElement(['Reguler','One Day','Executive']),
+        		'price'=> $faker->randomDigitNotNull()*10000,
+        		'isironing'=> $faker->boolean(),
+        		'estimation'=> $faker->numberBetween(1,6)*12,
+                'deleted'=>0,
             ]);
-            Paket::insert([
-                'akun_id'=>'2',
-                'nama'=>'Setrika',
-                'harga'=> $faker->randomDigit(),
-                'isetrika'=> $faker->boolean(),
-                'estimasi'=> $faker->randomDigit()
-                ]);
+        }
     }
 }

@@ -15,10 +15,12 @@ class CreateSewasTable extends Migration
     {
         Schema::create('sewas', function (Blueprint $table) {
             $table->id();
-            $table->integer('midtrans_id');
-            $table->integer('akun_id');
+            $table->string('midtrans_id');
+            $table->integer('user_id');
             $table->string('method');
-            $table->dateTime('waktu');
+            $table->string('status');
+            $table->dateTime('time');
+            $table->integer('amount');
             $table->timestamps();
             //$table->foreign('akun_id')->references('id')->on('users')->onDelete('cascade');
         });

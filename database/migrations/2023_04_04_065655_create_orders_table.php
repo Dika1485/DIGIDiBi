@@ -17,9 +17,10 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('transaction_id');
             $table->string('order_id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('nohp');
+            $table->string('user_id');
+            // $table->string('name');
+            // $table->string('email');
+            // $table->string('nohp');
             $table->string('status');
             $table->string('gross_amount');
             $table->string('payment_type');

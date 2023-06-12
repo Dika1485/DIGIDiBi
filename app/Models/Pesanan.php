@@ -14,6 +14,6 @@ class Pesanan extends Model
         return $this->belongsTo(Paket::class);
     }
     public function progress (){
-        return $this->hasMany(Progress::class);
+        return $this->hasMany(Progres::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class WebController extends Controller
 {
@@ -34,32 +35,34 @@ class WebController extends Controller
 		$params = array(
 		    'transaction_details' => array(
 		        'order_id' => rand(),
-		        'gross_amount' => 13000,
+		        'gross_amount' => 10000,
 		    ),
 		    "item_details" => array( 
+		        // [
+		        // 	'id'=> 'a01',
+		        // 	'price'=> 7000,
+		        // 	'quantity'=> 1,
+		        // 	'name'=> 'Apple'
+		        // ],
 		        [
-		        	'id'=> 'a01',
-		        	'price'=> 7000,
-		        	'quantity'=> 1,
-		        	'name'=> 'Apple'
-		        ],
-		        [
-		        	'id'=> 'b02',
-		        	'price'=> 3000,
+		        	'id'=> rand(),
+		        	'price'=> 10000,
 		        	'quantity'=> 2,
-		        	'name'=> 'Orange'
+		        	'name'=> 'Rental DIGIDiBi Platform'
 		        ]
 		    ),
 		    'customer_details' => array(
-		        'first_name' => $request->get('name'),
-		        'last_name' => '',
-		        'email' => $request->get('email'),
-		        'phone' => $request->get('nohp'),
+		        // 'first_name' => $request->get('name'),
+		        // 'last_name' => '',
+		        // 'email' => $request->get('email'),
+		        // 'phone' => $request->get('nohp'),
+				'username' => Auth::user()->username,
+				'email' => Auth::user()->email,
 		    ),
 		);
 		
 		$snapToken = \Midtrans\Snap::getSnapToken($params);
-    	return view('payment',['snapToken'=>$snapToken]);
+    	return view('index',['snapToken'=>$snapToken]);
     }
     public function payment_post(Request $request){
     	$json=json_decode($request->get('json'));
@@ -71,9 +74,9 @@ class WebController extends Controller
     	$order->payment_type=$json->payment_type;
     	$order->payment_code=isset($json->payment_code)?$json->payment_code:null;
     	$order->pdf_url=isset($json->pdf_url)?$json->pdf_url:null;
-    	$order->name=$request->get('name');
-    	$order->email=$request->get('email');
-    	$order->nohp=$request->get('nohp');
+    	$order->user_id=Auth::user()->id;
+    	// $order->email=$request->get('email');
+    	// $order->nohp=$request->get('nohp');
     	return $order->save()?redirect(url('/'))->with('alert-success','Order berhasil dibuat'):redirect(url('/'))->with('alert-failed','Terjadi kesalahan');
     }
 }

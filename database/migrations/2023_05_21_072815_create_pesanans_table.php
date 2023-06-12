@@ -15,15 +15,16 @@ class CreatePesanansTable extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->integer('paket_id');
-            $table->string('nama');
-            $table->string('no_hp');
-            $table->integer('berat');
-            $table->string('alamat');
-            $table->tinyInteger('isantarjemput');
-            $table->dateTime('estimasi');
-            $table->dateTime('tgl_pesan');
-            $table->dateTime('tgl_selesai');
+            $table->string('check_id')->unique();
+            $table->integer('packagetype_id');
+            $table->string('name');
+            $table->string('phonenumber');
+            $table->integer('weight');
+            $table->string('address');
+            $table->tinyInteger('isshuttle');
+            $table->dateTime('timeestimation');
+            $table->dateTime('timeorder');
+            $table->dateTime('timefinish')->nullable();
             $table->timestamps();
             //$table->foreign('paket_id')->references('id')->on('pakets')->onDelete('cascade');
         });
