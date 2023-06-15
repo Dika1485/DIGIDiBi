@@ -38,7 +38,7 @@ class PesananController extends Controller
 		}
     	else{
             if(Auth::user()->deadline < now()) return redirect(url('/dashboard#rental_now'));
-            $pesanan = Pesanan::where('id',$request->get('id'))->join('pakets','pakets.id','pesanans.packagetype_id')
+            $pesanan = Pesanan::where('pesanans.id',$request->get('id'))->join('pakets','pakets.id','pesanans.packagetype_id')
             ->where('pakets.user_id',Auth::user()->id)->select('pakets.name as namapaket','pesanans.*')->get();
         }
 
