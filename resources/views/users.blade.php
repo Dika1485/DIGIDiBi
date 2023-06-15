@@ -355,9 +355,9 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -414,7 +414,7 @@
                                             <th>Laundry Name</th>
                                             <th>Address</th>
                                             <th>Rental Deadline</th>
-                                            <!-- <th>Action</th> -->
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -428,7 +428,7 @@
                                             <th>Laundry Name</th>
                                             <th>Address</th>
                                             <th>Rental Deadline</th>
-                                            <!-- <th>Action</th> -->
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -443,7 +443,11 @@
                                             <td>{{$user->laundryname}}</td>
                                             <td>{{$user->address}}</td>
                                             <td>{{$user->deadline}}</td>
-                                            <!-- <td><button class="btn btn-primary">Edit</button> | <button class="btn btn-danger">Delete</button></td> -->
+                                            <form action="/dashboard/users" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$user->id}}">
+                                            <td><a href="/dashboard/users/edit?id={{$user->id}}" class="btn btn-primary">Edit Profile</a> | <a href="/dashboard/users/editpassword?id={{$user->id}}" class="btn btn-secondary">Edit Password</a> | <button type="submit" name="submit" class="btn btn-danger">Delete</button></td>
+                                            </form>
                                         </tr>
                                         @endforeach
                                         <!-- <tr>

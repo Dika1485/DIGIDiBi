@@ -357,7 +357,7 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
@@ -460,8 +460,9 @@
                                             <input type="hidden" name="isshuttle" value="{{$pesanan->isshuttle}}">
                                             <input type="hidden" name="isironing" value="{{$pesanan->isironing}}">
                                             <td>
-                                                <button type="submit" name="progress" value="{{$pesanan->progress}}" class="btn btn-primary">Next</button>
+                                                <button type="submit" name="progress" value="{{$pesanan->progress}}" class="btn btn-primary">Next</button> | 
                                                  <!-- | <a href="https://wa.me/" target="_blank" class="btn btn-info" rel="noopener noreferrer">Share</a> -->
+                                                <a class="btn btn-secondary" href="/dashboard/order/edit?id={{$pesanan->id}}">Edit</a>
                                             </td>
                                             </form>
                                         </tr>

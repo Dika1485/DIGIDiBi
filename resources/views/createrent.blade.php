@@ -355,9 +355,9 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -400,6 +400,8 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Form Create Rental</h6>
                         </div>
+                        <form action="/dashboard/rent/create" method="post">
+                        @csrf
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
@@ -428,31 +430,34 @@
                                             <th>Midtrans ID</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="nama" aria-describedby="emailHelp"
-                                                placeholder="Enter Midtrans ID..."></td>
+                                                placeholder="Enter Midtrans ID..." name="midtrans_id"></td>
                                         </tr>
                                         <tr>
                                             <th>User</th>
                                             <td><select type="text" class="form-control form-control-user select2"
                                                 id="harga" aria-describedby="emailHelp"
-                                                placeholder="Choose User">
-                                                    <option value="">imnotdika</option>
-                                                    <option value="">abimanyuputraarjuna</option>
-                                                    <option value="">adigas</option>
+                                                placeholder="Choose User" name="user_id" required>
+                                                    @foreach($user as $user)
+                                                    <option value="{{$user->id}}">{{$user->id}} - {{$user->username}} - {{$user->email}} - {{$user->laundryname}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
-                                                
                                         </tr>
                                         <tr>
                                             <th>Bill Method</th>
-                                            <td><input type="text" class="form-control form-control-user"
+                                            <td><select type="text" class="form-control form-control-user select2"
                                                 id="setrika" aria-describedby="emailHelp"
-                                                placeholder="Bill Method"></td>
+                                                placeholder="Bill Method" name="method" required>
+                                                    <option value="qris">qris</option>
+                                                    <option value="bank_transfer">bank_transfer</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>Datetime</th>
                                             <td><input type="datetime-local" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Datetime"></td>
+                                                placeholder="Datetime" name="time" required></td>
                                         </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
@@ -899,8 +904,8 @@
                             </div>
                                 <input type="submit" class="btn btn-success form-control form-control-user" id="nama" value="Submit">
                         </div>
+                        </form>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

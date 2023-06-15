@@ -44,6 +44,7 @@ class PesananSeeder extends Seeder
 	        	'weight'=> $faker->numberBetween(1,10),
 	        	'address'=> $faker->address,
 	        	'isshuttle'=> $faker->boolean,
+	        	'deleted'=> 0,
 	        	'timeestimation'=> $faker->dateTimeBetween('+1 day', '+2 day'),
 	        	'timeorder'=> $faker->dateTimeBetween('-2 day', '-1 day'),
 	        	'timefinish'=> NULL

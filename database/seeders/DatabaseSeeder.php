@@ -13,8 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        PaketSeeder::run();
         UserSeeder::run();
+        SewaSeeder::run();
+        PaketSeeder::run();
         PesananSeeder::run();
         ProgressSeeder::run();
     }

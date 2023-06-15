@@ -20,7 +20,7 @@ class ProgressSeeder extends Seeder
             Progres::insert([
 	            'order_id'=>$i,
 	            'time'=>$faker->dateTimeBetween('-1 day', 'now'),
-	            'progress'=>$faker->randomElement(['In Queue','Wash','Ironing','Packing','Delivered']),
+	            'progress'=>$faker->randomElement(['In Queue','Wash','Ironing','Packing','Being Delivered']),
             ]);
         }
     }

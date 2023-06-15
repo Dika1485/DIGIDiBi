@@ -358,7 +358,7 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
@@ -435,7 +435,11 @@
                                                 id="nama" aria-describedby="emailHelp"
                                                 placeholder="Choose package type..." name="packagetype_id" required>
                                                 @foreach($paket as $paket)
-                                                    <option value="{{$paket->id}}">{{$paket->name}}</option>
+                                                    @if(Auth::user()->role="Admin")
+                                                        <option value="{{$paket->id}}">{{$paket->id}} - {{$paket->name}}</option>
+                                                    @else
+                                                        <option value="{{$paket->id}}">{{$paket->name}}</option>
+                                                    @endif
                                                 @endforeach
                                                 </select>
                                             </td>

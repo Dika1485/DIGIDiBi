@@ -355,15 +355,15 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/dashboard/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -413,7 +413,7 @@
                                             <th>Bill Method</th>
                                             <th>Datetime</th>
                                             <th>Status</th>
-                                            <!-- <th>Action</th> -->
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -426,7 +426,7 @@
                                             <th>Bill Method</th>
                                             <th>Datetime</th>
                                             <th>Status</th>
-                                            <!-- <th>Action</th> -->
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -440,7 +440,11 @@
                                             <td>{{$sewa->method}}</td>
                                             <td>{{$sewa->time}}</td>
                                             <td>{{$sewa->status}}</td>
-                                            <!-- <td><button class="btn btn-primary">Edit</button> | <button class="btn btn-danger">Delete</button></td> -->
+                                            <form action="/dashboard/rent" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$sewa->id}}">
+                                            <td><a href="/dashboard/rent/edit?id={{$sewa->id}}" class="btn btn-primary">Edit</a> | <button type="submit" name="submit" class="btn btn-danger">Delete</button></td>
+                                            </form>
                                         </tr>
                                         @endforeach
                                         <!-- <tr>
@@ -930,7 +934,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Logout') }}</a>
+                    <!-- <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">{{ __('Log Out') }}</x-jet-dropdown-link> -->
+                    </form>
                 </div>
             </div>
         </div>

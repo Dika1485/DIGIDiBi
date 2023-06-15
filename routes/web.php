@@ -55,9 +55,9 @@ Route::get('/forgot-password', function () {
 //     return view('check');
 // });
 Route::get('/check', [ProgresController::class, 'check']);
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
 Route::middleware([
     'auth:sanctum',
@@ -70,26 +70,16 @@ Route::middleware([
         return view('profile');
     });
     Route::get('/dashboard/packagetype/create', function () {
+        if(Auth::user()->role!="Admin"){
+            if(Auth::user()->deadline < now()) return redirect(url('/dashboard#rental_now'));
+        }
         return view('createpackagetype');
     });
     Route::post('/dashboard/packagetype/create', [PaketController::class, 'create']);
     Route::get('/dashboard/order/create', [PesananController::class, 'read_packagetype']);
     Route::post('/dashboard/order/create', [PesananController::class, 'create']);
-    Route::get('/dashboard/users/create', function () {
-        return view('createuser');
-    });
-    Route::get('/dashboard/rent/create', function () {
-        return view('createrent');
-    });
-    Route::get('/dashboard/order/update', function () {
-        return view('updateorder');
-    });
-    Route::get('/dashboard/users/update', function () {
-        return view('updateuser');
-    });
-    Route::get('/dashboard/rent/update', function () {
-        return view('updaterent');
-    });
+    Route::get('/dashboard/order/edit', [PesananController::class, 'read_id']);
+    Route::post('/dashboard/order/edit', [PesananController::class, 'update']);
     Route::get('/dashboard/profile/edit', function () {
         return view('editprofile');
     });
@@ -105,6 +95,24 @@ Route::middleware([
     Route::get('/dashboard/order', [PesananController::class, 'read']);
     Route::post('/dashboard/order', [ProgresController::class, 'update']);
     Route::get('/dashboard/history', [PesananController::class, 'read_history']);
-    Route::get('/dashboard/users', [UserController::class, 'read']);
+    Route::post('/dashboard/history', [PesananController::class, 'delete']);
+    Route::get('/dashboard/users', [UserController::class, 'read_all']);
     Route::get('/dashboard/rent', [SewaController::class, 'read']);
+    Route::post('/dashboard/rent', [SewaController::class, 'delete']);
+    Route::get('/dashboard/users/create', function () {
+        if (Auth::user()->role=="Admin") {
+            return view('createuser');
+        }
+        else return abort(404);
+    });
+    Route::post('/dashboard/users', [UserController::class, 'delete']);
+    Route::post('/dashboard/users/create', [UserController::class, 'create']);
+    Route::get('/dashboard/rent/create', [UserController::class, 'read']);
+    Route::post('/dashboard/rent/create', [SewaController::class, 'create']);
+    Route::get('/dashboard/rent/edit', [SewaController::class, 'read_id']);
+    Route::post('/dashboard/rent/edit', [SewaController::class, 'update']);
+    Route::get('/dashboard/users/edit', [UserController::class, 'read_id']);
+    Route::post('/dashboard/users/edit', [UserController::class, 'updateuser']);
+    Route::get('/dashboard/users/editpassword', [UserController::class, 'read_it']);
+    Route::post('/dashboard/users/editpassword', [UserController::class, 'updateuserpassword']);
 });

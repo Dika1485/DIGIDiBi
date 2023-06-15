@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - Edit Profile</title>
+    <title>DIGIDiBi - Edit User Password</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -146,8 +146,7 @@
             </li> -->
 
             <!-- Nav Item - Tables -->
-            @if(Auth::user()->role=="Admin")
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/dashboard/users">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Users</span></a>
@@ -159,7 +158,6 @@
                     <i class="fas fa-fw fa-money-check-alt"></i>
                     <span>Rental</span></a>
             </li>
-            @endif
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -360,7 +358,7 @@
 <!--                                    <div>-->
 <!--                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone-->
 <!--                                            told me that people say this to all dogs, even if they aren't good...</div>-->
-<!--                                        <div return redirect(url('/dashboard/profile/edit'));class="small text-gray-500">Chicken the Dog · 2w</div>-->
+<!--                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>-->
 <!--                                    </div>-->
 <!--                                </a>-->
 <!--                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>-->
@@ -408,21 +406,22 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Edit Profile</h1>
-                    <p class="mb-4">Here is a page to edit profile.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Edit User Password</h1>
+                    <p class="mb-4">Here is a page to edit password of user.</p>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Form Edit Profile</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Form Edit User Password</h6>
                         </div>
                         <div class="card-body">
+                        <x-jet-validation-errors class="mb-4 text-danger" />
                         @if (isset($hasil))
                             <div class="mb-4 font-medium text-sm text-green-600">
                                 <p class="mb-4 text-danger">{{$hasil}}</p>
                             </div>
                         @endif
-                        <form action="/dashboard/profile/edit" method="POST">
+                        <form action="/dashboard/users/editpassword" method="POST">
                             @csrf
                             <div class="table-responsive">
                                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
@@ -447,7 +446,7 @@
                                         </tr>
                                     </tfoot> -->
                                     <tbody>
-                                        <tr>
+                                        <!-- <tr>
                                             <th>Email</th>
                                             <td><input type="email" class="form-control form-control-user"
                                                 id="nama" aria-describedby="emailHelp"
@@ -458,14 +457,15 @@
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="harga" aria-describedby="emailHelp"
                                                 placeholder="Username" name="username" value="{{Auth::user()->username}}" required autocomplete="username"></td>
-                                        </tr>
+                                        </tr> -->
                                         <!-- <tr>
                                             <th>Current Password</th>
                                             <td><input type="password" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Current Password" name="current_password" required autocomplete="current-password"></td>
+                                                placeholder="Enter Current Password..." name="current_password" required autocomplete="current-password"></td>
                                         </tr> -->
-                                        <!-- <tr>
+                                        <input type="hidden" name="id" value="{{$id}}">
+                                        <tr>
                                             <th>Password</th>
                                             <td><input type="password" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
@@ -476,8 +476,8 @@
                                             <td><input type="password" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
                                                 placeholder="Repeat Password" name="password_confirmation" required autocomplete="new-password"></td>
-                                        </tr> -->
-                                        <tr>
+                                        </tr>
+                                        <!-- <tr>
                                             <th>Laundry Name</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="harga" aria-describedby="emailHelp"
@@ -494,7 +494,7 @@
                                             <td><textarea type="text" class="form-control form-control-user"
                                                 id="alamat" aria-describedby="emailHelp"
                                                 placeholder="Address" name="address" required autocomplete="address">{{Auth::user()->address}}</textarea></td>
-                                        </tr>
+                                        </tr> -->
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
                                             <td>Junior Technical Author</td>

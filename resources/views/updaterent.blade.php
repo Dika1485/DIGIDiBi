@@ -31,7 +31,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
@@ -355,15 +355,15 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/dashboard/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -400,6 +400,8 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Form Update Rental</h6>
                         </div>
+                        <form action="/dashboard/rent/edit" method="post">
+                        @csrf
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
@@ -423,35 +425,41 @@
                                             <th>Action</th>
                                         </tr>
                                     </tfoot> -->
+                                    @foreach($sewa as $sewa)
                                     <tbody>
+                                        <input type="hidden" name="id" value="{{$sewa->id}}">
                                         <tr>
                                             <th>Midtrans ID</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="nama" aria-describedby="emailHelp"
-                                                placeholder="Enter Midtrans ID..."></td>
+                                                placeholder="Enter Midtrans ID..." name="midtrans_id" value="{{$sewa->midtrans_id}}"></td>
                                         </tr>
                                         <tr>
                                             <th>User</th>
                                             <td><select type="text" class="form-control form-control-user select2"
                                                 id="harga" aria-describedby="emailHelp"
-                                                placeholder="Choose User">
-                                                    <option value="">imnotdika</option>
-                                                    <option value="">abimanyuputraarjuna</option>
-                                                    <option value="">adigas</option>
+                                                placeholder="Choose User" name="user_id" required>
+                                                    @foreach($user as $user)
+                                                    <option value="{{$user->id}}" {{$sewa->user_id==$user->id?"selected":""}}>{{$user->id}} - {{$user->username}} - {{$user->email}} - {{$user->laundryname}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Payment Method</th>
-                                            <td><input type="text" class="form-control form-control-user"
+                                            <th>Bill Method</th>
+                                            <td><select type="text" class="form-control form-control-user select2"
                                                 id="setrika" aria-describedby="emailHelp"
-                                                placeholder="Payment Method"></td>
+                                                placeholder="Bill Method" name="method" required>
+                                                    <option value="qris" {{$sewa->method=="qris"?"selected":""}}>qris</option>
+                                                    <option value="bank_transfer" {{$sewa->method=="bank_transfer"?"selected":""}}>bank_transfer</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>Datetime</th>
                                             <td><input type="datetime-local" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Datetime"></td>
+                                                placeholder="Datetime" name="time" value="{{$sewa->time}}" required></td>
                                         </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
@@ -894,12 +902,13 @@
                                             <td>$112,000</td>
                                         </tr> -->
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                                 <input type="submit" class="btn btn-success form-control form-control-user" id="nama" value="Submit">
                         </div>
+                        </form>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -941,7 +950,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Logout') }}</a>
+                    <!-- <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">{{ __('Log Out') }}</x-jet-dropdown-link> -->
+                    </form>
                 </div>
             </div>
         </div>

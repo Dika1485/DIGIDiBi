@@ -11,6 +11,9 @@ use App\Models\Progres;
 class ProgresController extends Controller
 {
     public function update(Request $request){
+        if(Auth::user()->role!="Admin"){
+            if(Auth::user()->deadline < now()) return redirect(url('/dashboard#rental_now'));
+        }
     	$progres = new Progres();
         $next="";
         if ($request->post('progress')=="In Queue") {

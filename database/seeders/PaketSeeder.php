@@ -18,7 +18,7 @@ class PaketSeeder extends Seeder
         $faker = Faker::create('id_ID');
         for ($i=1; $i <= 10; $i++) {
         	Paket::insert([
-        		'user_id'=>$faker->numberBetween(1,12),
+        		'user_id'=>$faker->numberBetween(2,12),
         		'name'=>$faker->randomElement(['Reguler','One Day','Executive']),
         		'price'=> $faker->randomDigitNotNull()*10000,
         		'isironing'=> $faker->boolean(),

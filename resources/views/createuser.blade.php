@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 
@@ -142,7 +143,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard/rent">
                     <i class="fas fa-fw fa-money-check-alt"></i>
-                    <span>Rent</span></a>
+                    <span>Rental</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
@@ -355,9 +356,9 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -400,7 +401,14 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Form Create User</h6>
                         </div>
+                        <form action="/dashboard/users/create" method="post">
+                        @csrf
                         <div class="card-body">
+                        @if (isset($hasil))
+                            <div class="mb-4 font-medium text-sm text-green-600">
+                                <p class="mb-4 text-danger">{{$hasil}}</p>
+                            </div>
+                        @endif
                             <div class="table-responsive">
                                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                                     <!-- <thead>
@@ -428,43 +436,59 @@
                                             <th>Email</th>
                                             <td><input type="email" class="form-control form-control-user"
                                                 id="nama" aria-describedby="emailHelp"
-                                                placeholder="Enter Email..."></td>
+                                                placeholder="Enter Email..." name="email" required></td>
                                         </tr>
                                         <tr>
                                             <th>Username</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="harga" aria-describedby="emailHelp"
-                                                placeholder="Username"></td>
+                                                placeholder="Username" name="username" required></td>
                                         </tr>
                                         <tr>
                                             <th>Password</th>
                                             <td><input type="password" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Password"></td>
+                                                placeholder="Password" name="password" required></td>
                                         </tr>
                                         <tr>
                                             <th>Repeat Password</th>
                                             <td><input type="password" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Repeat Password"></td>
+                                                placeholder="Repeat Password" name="password_confirmation" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Role</th>
+                                            <td><select type="text" class="form-control form-control-user select2"
+                                                id="harga" aria-describedby="emailHelp"
+                                                placeholder="Choose Role" name="role" required>
+                                                    <option value="User">User</option>
+                                                    <option value="Admin">Admin</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>Laundry Name</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="harga" aria-describedby="emailHelp"
-                                                placeholder="Laundry Name"></td>
+                                                placeholder="Laundry Name" name="laundryname" required></td>
                                         </tr>
                                         <tr>
                                             <th>Phone Number</th>
                                             <td><input type="tel" class="form-control form-control-user"
                                                 id="hp" aria-describedby="emailHelp"
-                                                placeholder="Phone Number"></td>
+                                                placeholder="Phone Number" name="phonenumber"></td>
                                         </tr>
                                         <tr>
                                             <th>Address</th>
                                             <td><textarea type="text" class="form-control form-control-user"
                                                 id="alamat" aria-describedby="emailHelp"
-                                                placeholder="Address"></textarea></td>
+                                                placeholder="Address" name="address" required></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Rental Deadline</th>
+                                            <td><input type="datetime-local" class="form-control form-control-user"
+                                                id="hp" aria-describedby="emailHelp"
+                                                placeholder="Deadline" name="deadline"></td>
                                         </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
@@ -911,6 +935,7 @@
                             </div>
                                 <input type="submit" class="btn btn-success form-control form-control-user" id="nama" value="Submit">
                         </div>
+                        </form>
                     </div>
 
                 </div>
@@ -982,6 +1007,12 @@
 
 <!-- Page level custom scripts -->
 <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
 
 </body>
 

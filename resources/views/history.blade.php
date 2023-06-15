@@ -357,7 +357,7 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
@@ -418,6 +418,7 @@
                                             <th>Time Estimation</th>
                                             <th>Time Order</th>
                                             <th>Time Finish</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -433,10 +434,12 @@
                                             <th>Time Estimation</th>
                                             <th>Time Order</th>
                                             <th>Time Finish</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     	@foreach($pesanan as $pesanan)
+                                        @if((Auth::user()->role=="Admin") or ($pesanan->deleted!=1))
                                         <tr>
                                             <td>{{$pesanan->id}}</td>
                                             <td>{{$pesanan->namapaket}}</td>
@@ -449,7 +452,17 @@
                                             <td>{{$pesanan->timeestimation}}</td>
                                             <td>{{$pesanan->timeorder}}</td>
                                             <td>{{$pesanan->timefinish}}</td>
+                                            <form action="/dashboard/history" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$pesanan->id}}">
+                                            <td><a href="/dashboard/order/edit?id={{$pesanan->id}}" class="btn btn-primary">Edit</a> | 
+                                            @if($pesanan->timefinish!=NULL)
+                                                <button type="submit" name="submit" class="btn btn-danger">Delete</button>
+                                            @endif
+                                            </td>
+                                            </form>
                                         </tr>
+                                        @endif
                                         @endforeach
                                         <!-- <tr>
                                             <td>Ashton Cox</td>

@@ -132,6 +132,22 @@
 <!--            </li>-->
 
             <!-- Nav Item - Tables -->
+            @if(Auth::user()->role=="Admin")
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/users">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/rent">
+                    <i class="fas fa-fw fa-money-check-alt"></i>
+                    <span>Rental</span></a>
+            </li>
+            @endif
+
+            <!-- Nav Item - Tables -->
             <li class="nav-item active">
                 <a class="nav-link" href="/dashboard/order">
                     <i class="fas fa-fw fa-cash-register"></i>
@@ -341,7 +357,7 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
@@ -349,7 +365,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/dashboard/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -379,13 +395,15 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Update Order</h1>
-                    <p class="mb-4">Here is a page to displays orders that have not been completed.</p>
+                    <p class="mb-4">Here is a page to edit detail order of laundry.</p>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Form Update Order</h6>
                         </div>
+                        <form action="/dashboard/order/edit" method="post">
+                        @csrf
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
@@ -409,44 +427,52 @@
                                             <th>Action</th>
                                         </tr>
                                     </tfoot> -->
+                                    @foreach($pesanan as $pesanan)
                                     <tbody>
                                         <tr>
                                             <th>Package Type</th>
+                                            <input type="hidden" name="id" value="{{$pesanan->id}}">
                                             <td><select type="text" class="form-control form-control-user select2"
                                                 id="nama" aria-describedby="emailHelp"
-                                                placeholder="Choose package type...">
-                                                    <option value="">Reguler</option>
-                                                    <option value="">One Day</option>
-                                            </select></td>
+                                                placeholder="Choose package type..." name="packagetype_id" required>
+                                                @foreach($paket as $paket)
+                                                    @if(Auth::user()->role="Admin")
+                                                        <option value="{{$paket->id}}" {{$paket->id==$pesanan->packagetype_id?"selected":""}}>{{$paket->id}} - {{$paket->name}}</option>
+                                                    @else
+                                                        <option value="{{$paket->id}}" {{$paket->id==$pesanan->packagetype_id?"selected":""}}>{{$paket->name}}</option>
+                                                    @endif
+                                                @endforeach
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>Customer Name</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="harga" aria-describedby="emailHelp"
-                                                placeholder="Customer Name"></td>
+                                                placeholder="Customer Name" name="name" value="{{$pesanan->name}}" required></td>
                                         </tr>
                                         <tr>
                                             <th>Phone Number</th>
                                             <td><input type="tel" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Phone Number"></td>
+                                                placeholder="Phone Number" name="phonenumber" value="{{$pesanan->phonenumber}}" required></td>
                                         </tr>
                                         <tr>
                                             <th>Weight (Kg)</th>
-                                            <td><input type="number" class="form-control form-control-user"
+                                            <td><input type="text" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Weight"></td>
+                                                placeholder="Weight" name="weight" value="{{$pesanan->weight}}" required></td>
                                         </tr>
                                         <tr>
                                             <th>Address</th>
                                             <td><textarea type="text" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Address"></textarea></td>
+                                                placeholder="Address" name="address" required>{{$pesanan->address}}</textarea></td>
                                         </tr>
                                         <tr>
                                             <th>Shuttle (Yes/No)</th>
                                             <td><input type="checkbox" class="form-control form-control-user"
-                                                id="shuttle" aria-describedby="emailHelp"></td>
+                                                id="shuttle" aria-describedby="emailHelp" name="isshuttle" {{$pesanan->isshuttle?"checked":""}}></td>
                                         </tr>
                                     
                                         <!-- <tr>
@@ -890,12 +916,14 @@
                                             <td>$112,000</td>
                                         </tr> -->
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                                 <input type="submit" class="btn btn-success form-control form-control-user" id="nama" value="Submit">
                         </div>
+                        
                     </div>
-
+                    </form>
                 </div>
                 <!-- /.container-fluid -->
 

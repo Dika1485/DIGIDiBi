@@ -22,6 +22,7 @@ class CreatePesanansTable extends Migration
             $table->integer('weight');
             $table->string('address');
             $table->tinyInteger('isshuttle');
+            $table->tinyInteger('deleted');
             $table->dateTime('timeestimation');
             $table->dateTime('timeorder');
             $table->dateTime('timefinish')->nullable();

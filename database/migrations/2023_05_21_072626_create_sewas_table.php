@@ -15,7 +15,7 @@ class CreateSewasTable extends Migration
     {
         Schema::create('sewas', function (Blueprint $table) {
             $table->id();
-            $table->string('midtrans_id');
+            $table->string('midtrans_id')->nullable();
             $table->integer('user_id');
             $table->string('method');
             $table->string('status');

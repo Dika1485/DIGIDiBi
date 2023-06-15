@@ -15,7 +15,7 @@ class SewaSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID)');
-        for ($i=1; $i <= 10; $i++) { 
+        for ($i=2; $i <= 12; $i++) { 
             Sewa::insert([
                 'user_id' =>$i,
                 'midtrans_id' => rand(),

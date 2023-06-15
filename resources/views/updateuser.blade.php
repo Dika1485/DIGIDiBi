@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DIGIDiBi - Update User</title>
+    <title>DIGIDiBi - Edit User</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 
@@ -31,7 +32,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
@@ -142,7 +143,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard/rent">
                     <i class="fas fa-fw fa-money-check-alt"></i>
-                    <span>Rent</span></a>
+                    <span>Rental</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
@@ -355,15 +356,15 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                                 <i class="rounded-circle fas fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/dashboard/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -376,7 +377,7 @@
 <!--                                    Activity Log-->
 <!--                                </a>-->
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -392,15 +393,22 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800"> Update User</h1>
-                    <p class="mb-4">Here is the page for manage users.</p>
+                    <h1 class="h3 mb-2 text-gray-800"> Edit User</h1>
+                    <p class="mb-4">Here is a page to edit user data.</p>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Form Update User</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Form Edit User</h6>
                         </div>
+                        <form action="/dashboard/users/edit" method="post">
+                        @csrf
                         <div class="card-body">
+                        @if (isset($hasil))
+                            <div class="mb-4 font-medium text-sm text-green-600">
+                                <p class="mb-4 text-danger">{{$hasil}}</p>
+                            </div>
+                        @endif
                             <div class="table-responsive">
                                 <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                                     <!-- <thead>
@@ -423,48 +431,66 @@
                                             <th>Action</th>
                                         </tr>
                                     </tfoot> -->
+                                    @foreach($user as $user)
                                     <tbody>
+                                        <input type="hidden" name="id" value="{{$user->id}}">
                                         <tr>
                                             <th>Email</th>
                                             <td><input type="email" class="form-control form-control-user"
                                                 id="nama" aria-describedby="emailHelp"
-                                                placeholder="Enter Email..."></td>
+                                                placeholder="Enter Email..." name="email" value="{{$user->email}}" required></td>
                                         </tr>
                                         <tr>
                                             <th>Username</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="harga" aria-describedby="emailHelp"
-                                                placeholder="Username"></td>
+                                                placeholder="Username" name="username" value="{{$user->username}}" required></td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <th>Password</th>
                                             <td><input type="password" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Password"></td>
+                                                placeholder="Password" name="password" value="{{$user->email}}" required></td>
                                         </tr>
                                         <tr>
                                             <th>Repeat Password</th>
                                             <td><input type="password" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Repeat Password"></td>
+                                                placeholder="Repeat Password" name="password_confirmation" required></td>
+                                        </tr> -->
+                                        <tr>
+                                            <th>Role</th>
+                                            <td><select type="text" class="form-control form-control-user select2"
+                                                id="harga" aria-describedby="emailHelp"
+                                                placeholder="Choose Role" name="role" required>
+                                                    <option value="User" {{$user->role=="User"?"selected":""}}>User</option>
+                                                    <option value="Admin" {{$user->role=="Admin"?"selected":""}}>Admin</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>Laundry Name</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="harga" aria-describedby="emailHelp"
-                                                placeholder="Laundry Name"></td>
+                                                placeholder="Laundry Name" name="laundryname" value="{{$user->laundryname}}" required></td>
                                         </tr>
                                         <tr>
                                             <th>Phone Number</th>
                                             <td><input type="tel" class="form-control form-control-user"
                                                 id="hp" aria-describedby="emailHelp"
-                                                placeholder="Phone Number"></td>
+                                                placeholder="Phone Number" name="phonenumber" value="{{$user->phonenumber}}"></td>
                                         </tr>
                                         <tr>
                                             <th>Address</th>
                                             <td><textarea type="text" class="form-control form-control-user"
                                                 id="alamat" aria-describedby="emailHelp"
-                                                placeholder="Address"></textarea></td>
+                                                placeholder="Address" name="address" required>{{$user->address}}</textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Rental Deadline</th>
+                                            <td><input type="datetime-local" class="form-control form-control-user"
+                                                id="hp" aria-describedby="emailHelp"
+                                                placeholder="Deadline" name="deadline" value="{{$user->deadline}}"></td>
                                         </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
@@ -907,10 +933,12 @@
                                             <td>$112,000</td>
                                         </tr> -->
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                                 <input type="submit" class="btn btn-success form-control form-control-user" id="nama" value="Submit">
                         </div>
+                        </form>
                     </div>
 
                 </div>
@@ -954,7 +982,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Logout') }}</a>
+                    <!-- <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">{{ __('Log Out') }}</x-jet-dropdown-link> -->
+                    </form>
                 </div>
             </div>
         </div>
@@ -976,6 +1010,12 @@
 
 <!-- Page level custom scripts -->
 <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
 
 </body>
 
