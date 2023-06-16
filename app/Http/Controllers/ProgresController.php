@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Paket;
 use App\Models\Pesanan;
 use App\Models\Progres;
+use Illuminate\Support\Facades\Auth;
 
 class ProgresController extends Controller
 {
@@ -57,7 +58,8 @@ class ProgresController extends Controller
         if (isset($cekisset)){
             $pesanan = Pesanan::join('pakets','pakets.id','pesanans.packagetype_id')->where('pesanans.check_id',$request->get('id'))->select('pakets.name as namapaket','pakets.isironing','pakets.price','pesanans.*')->get();
             if ($pesanan->count()!=1) {
-                return redirect(url('/check'));
+                $hasil="Whoops! Something went wrong. These id do not match our records.";
+                return view('check',['hasil' => $hasil]);
             }
             foreach($pesanan as $pesanan){
                 $progres = Progres::where('order_id',$pesanan->id)->orderBy('time', 'desc')->get();

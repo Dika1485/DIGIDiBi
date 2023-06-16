@@ -25,7 +25,7 @@ class PaketController extends Controller
             if(Auth::user()->deadline < now()) return redirect(url('/dashboard#rental_now'));
         }
 		if(Auth::user()->role=="Admin"){
-    		$paket = Paket::where('pakets.id',$request->get('id'))->where('pakets.deleted',0)->get();
+    		$paket = Paket::where('pakets.id',$request->get('id'))->get();
 		}
 		else{
 			$paket = Paket::where('pakets.id',$request->get('id'))->where('pakets.user_id',Auth::user()->id)->where('pakets.deleted',0)->get();
@@ -47,12 +47,12 @@ class PaketController extends Controller
     	if($paket->count()==0) return abort(404);
         $paket = Paket::findOrFail($request->post('id'));
 		if(Auth::user()->role=="Admin"){
-			$pesanan = Pesanan::where('packagetype_id',$request->post('id'))->where('timefinish','==',NULL)->get();
+			$pesanan = Pesanan::where('packagetype_id',$request->post('id'))->where('timefinish',NULL)->get();
 			if($pesanan->count()==0){
 				foreach ($pesanan as $pesanan) {
 					$progress=Progres::where('order_id',$pesanan->id)->delete();
 				}
-				$pesanan = Pesanan::where('packagetype_id',$request->post('id'))->where('timefinish','==',NULL)->delete();
+				$pesanan = Pesanan::where('packagetype_id',$request->post('id'))->delete();
 				$paket->delete();
 				return redirect(url('/dashboard/packagetype'));
 			}

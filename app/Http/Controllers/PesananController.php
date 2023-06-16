@@ -13,11 +13,11 @@ class PesananController extends Controller
 {
     public function delete(Request $request){
     	if(Auth::user()->role=="Admin"){
-			$pesanan = Pesanan::where('timefinish','!=',NULL)->where('id',$request->post('id'))->get();
+			$pesanan = Pesanan::where('pesanans.timefinish','!=',NULL)->where('pesanans.id',$request->post('id'))->get();
 		}
     	else {
             if(Auth::user()->deadline<now()) return redirect(url('/dashboard#rent_now'));
-            $pesanan = Pesanan::where('timefinish','!=',NULL)->where('id',$request->get('id'))->join('pakets','pakets.id','pesanans.packagetype_id')
+            $pesanan = Pesanan::where('pesanans.timefinish','!=',NULL)->where('pesanans.id',$request->get('id'))->join('pakets','pakets.id','pesanans.packagetype_id')
             ->where('pakets.user_id',Auth::user()->id)->get();
         }
         if($pesanan->count()==0) return abort(404);
@@ -25,10 +25,12 @@ class PesananController extends Controller
         if(Auth::user()->role=="Admin"){
             $progress=Progres::where('order_id',$request->post('id'));
             $progress->delete();
-            $pesanan->delete();
+            $pesanan=Pesanan::where('id',$request->post('id'))->delete();
         }
-        else $pesanan->deleted=1;
-        $pesanan->save();
+        else{ 
+            $pesanan->deleted=1;
+            $pesanan->save();
+        }
     	return redirect(url('/dashboard/order'));
     }
     public function read_id(Request $request){

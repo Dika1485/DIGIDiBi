@@ -43,6 +43,11 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Check Laundry Order Progress</h1>
+                                        @if (isset($hasil))
+                                        <div class="mb-4 font-medium text-sm text-green-600">
+                                            <p class="mb-4 text-danger">{{$hasil}}</p>
+                                        </div>
+                                        @endif
                                     <form class="user" method="GET" action="/check">
                                         @csrf
                                         <div class="form-group">

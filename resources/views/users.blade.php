@@ -446,7 +446,11 @@
                                             <form action="/dashboard/users" method="post">
                                             @csrf
                                             <input type="hidden" name="id" value="{{$user->id}}">
-                                            <td><a href="/dashboard/users/edit?id={{$user->id}}" class="btn btn-primary">Edit Profile</a> | <a href="/dashboard/users/editpassword?id={{$user->id}}" class="btn btn-secondary">Edit Password</a> | <button type="submit" name="submit" class="btn btn-danger">Delete</button></td>
+                                            <td><a href="/dashboard/users/edit?id={{$user->id}}" class="btn btn-primary">Edit Profile</a> | <a href="/dashboard/users/editpassword?id={{$user->id}}" class="btn btn-secondary">Edit Password</a>
+                                            @if($user->id!=Auth::user()->id)
+                                             | <button type="submit" name="submit" class="btn btn-danger">Delete</button>
+                                            @endif
+                                            </td>
                                             </form>
                                         </tr>
                                         @endforeach

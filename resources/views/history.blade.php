@@ -408,6 +408,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Check ID</th>
                                             <th>Package Type</th>
                                             <th>Customer</th>
                                             <th>Phone Number</th>
@@ -424,6 +425,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Check ID</th>
                                             <th>Package Type</th>
                                             <th>Customer</th>
                                             <th>Phone Number</th>
@@ -442,6 +444,7 @@
                                         @if((Auth::user()->role=="Admin") or ($pesanan->deleted!=1))
                                         <tr>
                                             <td>{{$pesanan->id}}</td>
+                                            <td>{{$pesanan->check_id}}</td>
                                             <td>{{$pesanan->namapaket}}</td>
                                             <td>{{$pesanan->name}}</td>
                                             <td>{{$pesanan->phonenumber}}</td>

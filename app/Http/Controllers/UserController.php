@@ -152,7 +152,7 @@ class UserController extends Controller
 		if(Auth::user()->role!="Admin"){
             return abort(404);
 		}
-        $user = User::where('id',$request->post('id'))->get();
+        $user = User::where('id',$request->post('id'))->where('id','!=',Auth::user()->id)->get();
         if ($user->count()!=1) {
             return abort(404);
         }
