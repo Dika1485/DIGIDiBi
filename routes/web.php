@@ -35,9 +35,9 @@ Route::get('/', function () {
 // Route::get('register', function () {
 //     return view('register');
 // });
-Route::get('/forgot-password', function () {
-    return view('forgot-password');
-});
+// Route::get('/forgot-password', function () {
+//     return view('forgot-password');
+// });
 
 // Route::get('dashboard/packagetype/update', function () {
 //     return view('updatepackagetype');
