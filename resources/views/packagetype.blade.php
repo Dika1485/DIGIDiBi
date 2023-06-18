@@ -22,6 +22,9 @@
 
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
 
 </head>
 
@@ -411,7 +414,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Package Type</th>
-                                            <th>Price (Rp per Kg)</th>
+                                            <th>Price (per Kg)</th>
                                             <th>Ironing</th>
                                             <th>Estimation (Hour)</th>
                                             <th>Action</th>
@@ -421,7 +424,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Package Type</th>
-                                            <th>Price (Rp per Kg)</th>
+                                            <th>Price (per Kg)</th>
                                             <th>Ironing</th>
                                             <th>Estimation (Hour)</th>
                                             <th>Action</th>
@@ -432,7 +435,7 @@
                                         <tr>
                                             <td>{{$paket->id}}</td>
                                             <td>{{$paket->name}}</td>
-                                            <td>{{$paket->price}}</td>
+                                            <td>Rp. {{number_format($paket->price,2,',','.')}}</td>
                                             <td>{{($paket->isironing==0)?"No":"Yes"}}</td>
                                             <td>{{$paket->estimation}}</td>
                                             <form action="/dashboard/packagetype" method="post">

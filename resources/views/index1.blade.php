@@ -8,9 +8,9 @@
   <title>DIGIDiBi</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
   <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

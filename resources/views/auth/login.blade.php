@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
 
 </head>
 

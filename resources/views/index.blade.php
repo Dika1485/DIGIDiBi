@@ -44,8 +44,10 @@
             padding-top: 5px;
             font-size: 16px;
         } */
-        </style>
-
+    </style>
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
 </head>
 
 <body id="page-top">
@@ -439,7 +441,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{$month}},00</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{number_format($month,2,',','.')}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -457,7 +459,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Earnings (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{$year}},00</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. {{number_format($year,2,',','.')}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -614,31 +616,31 @@
                                 <div class="card-body">
                                     @if($all!=0)
                                     <h4 class="small font-weight-bold">In Queue<span
-                                            class="float-right">{{($all-$inqueue)/$all*100}}%</span></h4>
+                                            class="float-right">{{number_format(($all-$inqueue)/$all*100, 2)}}%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-danger" role="progressbar" style="width: {{($all-$inqueue)/$all*100}}%"
                                             aria-valuenow="{{($all-$inqueue)/$all*100}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <h4 class="small font-weight-bold">Wash<span
-                                            class="float-right">{{($all-$wash)/$all*100}}%</span></h4>
+                                            class="float-right">{{number_format(($all-$wash)/$all*100, 2)}}%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: {{($all-$wash)/$all*100}}%"
                                             aria-valuenow="{{($all-$wash)/$all*100}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <h4 class="small font-weight-bold">Ironing <span
-                                            class="float-right">{{($all-$ironing)/$all*100}}%</span></h4>
+                                            class="float-right">{{number_format(($all-$ironing)/$all*100, 2)}}%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar" role="progressbar" style="width: {{($all-$ironing)/$all*100}}%"
                                             aria-valuenow="{{($all-$ironing)/$all*100}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <h4 class="small font-weight-bold">Packing <span
-                                            class="float-right">{{($all-$packing)/$all*100}}%</span></h4>
+                                            class="float-right">{{number_format(($all-$packing)/$all*100, 2)}}%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: {{($all-$packing)/$all*100}}%"
                                             aria-valuenow="{{($all-$packing)/$all*100}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <h4 class="small font-weight-bold">Being Delivered <span
-                                            class="float-right">{{($all-$delivered)/$all*100}}%</span></h4>
+                                            class="float-right">{{number_format(($all-$delivered)/$all*100, 2)}}%</span></h4>
                                     <div class="progress">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: {{($all-$delivered)/$all*100}}%"
                                             aria-valuenow="{{($all-$delivered)/$all*100}}" aria-valuemin="0" aria-valuemax="100"></div>

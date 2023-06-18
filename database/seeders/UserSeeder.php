@@ -21,22 +21,32 @@ class UserSeeder extends Seeder
         User::insert([
             'username' => 'imnotdika',
             'email' => 'ptiandika@gmail.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('imnotdika1485'),
             'role' => 'Admin',
-            'laundryname' => 'imnotdika Laundry',
+            'laundryname' => 'imnotdika',
             'phonenumber' => '082226536669',
             'address' => 'Cilacap',
-            'deadline' => Carbon::now()->addDays(30)
+            'deadline' => NULL
         ]);
         User::insert([
             'username' => 'mamat',
             'email' => 'rochmat@gmail.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('mamatgenshinnumpak'),
             'role' => 'User',
             'laundryname' => 'mamat Laundry',
-            'phonenumber' => '+62 895-4177-73463',
+            'phonenumber' => '0895417773463',
             'address' => 'Purbalingga',
-            'deadline' => Carbon::now()->addDays(30)
+            'deadline' => Carbon::now()->addMonths(1)
+        ]);
+        User::insert([
+            'username' => 'abimanyu',
+            'email' => 'abee@gmail.com',
+            'password' => Hash::make('abimanyuputraarjuna'),
+            'role' => 'User',
+            'laundryname' => 'abi Laundry',
+            'phonenumber' => '082220638678',
+            'address' => 'Banjarnegara',
+            'deadline' => Carbon::now()->addMonths(1)
         ]);
         for ($i=1; $i <= 10; $i++) { 
             User::insert([

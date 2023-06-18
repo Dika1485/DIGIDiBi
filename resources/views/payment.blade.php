@@ -8,6 +8,9 @@
       data-client-key="SB-Mid-client-RGC0_Tjcsh2Hdoec"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
   </head>
 
   <body>

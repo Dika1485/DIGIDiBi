@@ -4,6 +4,9 @@
     <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
     <link rel="stylesheet" type="text/css" href="{{url('assets/style.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
   </head>
 
   <body>

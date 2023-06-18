@@ -22,6 +22,9 @@
 
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
 
 </head>
 
@@ -438,7 +441,7 @@
                                             <th>Price (Rp per Kg)</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="harga" aria-describedby="emailHelp"
-                                                placeholder="Price" name="price" required></td>
+                                                placeholder="Price" name="price" onkeypress="return hanyaAngka(event)" required></td>
                                         </tr>
                                         <tr>
                                             <th>Ironing (Yes/No)</th>
@@ -449,7 +452,7 @@
                                             <th>Estimation (Hour)</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Estimation" name="estimation"></td>
+                                                placeholder="Estimation" onkeypress="return hanyaAngka(event)" name="estimation"></td>
                                         </tr>
                                         <!-- <tr>
                                             <td>Ashton Cox</td>
@@ -968,6 +971,16 @@
 
 <!-- Page level custom scripts -->
 <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+<script>
+    function hanyaAngka(event) {
+        var charCode = event.which ? event.which : event.keyCode;
+        if (charCode < 48 || charCode > 57) {
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
+</script>
 
 </body>
 

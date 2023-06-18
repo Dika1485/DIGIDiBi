@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
 
 </head>
 
@@ -103,7 +106,7 @@
                                                         <tr>
                                                             <th>Price</th>
                                                             <td>:</td>
-                                                            <td>Rp. {{$pesanan->price*$pesanan->weight}},00</td>
+                                                            <td>Rp. {{number_format($pesanan->price*$pesanan->weight,2,',','.')}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>Shuttle</th>

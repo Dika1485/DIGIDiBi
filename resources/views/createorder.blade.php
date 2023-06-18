@@ -23,7 +23,9 @@
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
 </head>
 
 <body id="page-top">
@@ -460,7 +462,7 @@
                                             <th>Weight (Kg)</th>
                                             <td><input type="text" class="form-control form-control-user"
                                                 id="estimasi" aria-describedby="emailHelp"
-                                                placeholder="Weight" name="weight" required></td>
+                                                placeholder="Weight" name="weight" onkeypress="return hanyaAngka(event)" required></td>
                                         </tr>
                                         <tr>
                                             <th>Address</th>
@@ -995,6 +997,16 @@
     $(document).ready(function() {
         $('.select2').select2();
     });
+</script>
+<script>
+    function hanyaAngka(event) {
+        var charCode = event.which ? event.which : event.keyCode;
+        if (charCode < 48 || charCode > 57) {
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
 </script>
 </body>
 

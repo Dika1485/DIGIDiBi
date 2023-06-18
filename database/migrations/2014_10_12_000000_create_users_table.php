@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('phonenumber');
             $table->string('laundryname');
             $table->string('address');
-            $table->dateTime('deadline');
+            $table->dateTime('deadline')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

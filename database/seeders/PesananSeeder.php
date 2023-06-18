@@ -35,7 +35,7 @@ class PesananSeeder extends Seeder
 	    //     ]);
         // }
         for ($i=1; $i <= 100; $i++) {
-			$packagetype_id=$faker->numberBetween(1,10);
+			$packagetype_id=$faker->numberBetween(1,20);
 	        Pesanan::insert([
 	        	'packagetype_id'=>$packagetype_id,
 	        	'check_id'=>$date->year.$date->month.$date->day.$packagetype_id.$i+100,

@@ -22,6 +22,9 @@
 
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{asset('img/digidibiwhite.png')}}" />
 
 </head>
 
@@ -413,7 +416,7 @@
                                             <th>Customer</th>
                                             <th>Phone Number</th>
                                             <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
+                                            <th>Price</th>
                                             <th>Address</th>
                                             <th>Shuttle</th>
                                             <th>Time Estimation</th>
@@ -430,7 +433,7 @@
                                             <th>Customer</th>
                                             <th>Phone Number</th>
                                             <th>Weight (Kg)</th>
-                                            <th>Price (Rp)</th>
+                                            <th>Price</th>
                                             <th>Address</th>
                                             <th>Shuttle</th>
                                             <th>Time Estimation</th>
@@ -448,7 +451,7 @@
                                             <td>{{$pesanan->name}}</td>
                                             <td>{{$pesanan->phonenumber}}</td>
                                             <td>{{$pesanan->weight}}</td>
-                                            <td>{{$pesanan->weight*$pesanan->price}}</td>
+                                            <td>Rp. {{number_format($pesanan->weight*$pesanan->price,2,',','.')}}</td>
                                             <td>{{$pesanan->address}}</td>
                                             <td>{{$pesanan->isshuttle==1?"Yes":"No"}}</td>
                                             <td>{{$pesanan->timeestimation}}</td>
