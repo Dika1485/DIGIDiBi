@@ -88,6 +88,9 @@
                                     <div class="text-center">
                                         <a class="small" href="/register">Create an Account!</a>
                                     </div>
+                                    <div class="text-center">
+                                        <a class="small" href="/check">Check Laundry Order Progress</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

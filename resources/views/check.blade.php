@@ -76,6 +76,9 @@
 <!--                                        </a>-->
                                     </form>
                                     <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="/login">Login DIGIDiBi Account</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
